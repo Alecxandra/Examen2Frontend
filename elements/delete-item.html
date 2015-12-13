@@ -1,0 +1,49 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-material/paper-material.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="delete-item" attributes="id">
+  <template>
+    <div>
+      <paper-button on-click="deleteTask" raised>Borrar</paper-button>
+   </div>
+    
+    <iron-ajax
+               id="ajax"
+               handle-as="json"
+               method="DELETE"
+               on-response="handleResponse">
+    </iron-ajax>
+    
+    <style>
+     paper-material{
+       background-color: #00c853;
+     }
+     paper-button{
+       background-color:#03a9f4;
+     } 
+    </style>
+  </template>
+  
+  <script>
+    Polymer({
+     is: "delete-item",
+      properties:{
+        id:{
+          type: String,
+          value:""
+        }
+      },
+      deleteTask: function(){
+         this.$.ajax.url = "http://alecx-box-144703.nitrousapp.com/tasks/" + this.id;
+         this.$.ajax.generateRequest();
+      },
+      handleResponse: function(event) {
+        console.log(event);
+      },
+    });
+  </script>
+  
+</ dom-module>

@@ -1,0 +1,36 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<link rel="import" href="delete-item.html">
+<link rel="import" href="state-item.html">
+
+<dom-module id="task-element">
+  <template>
+      <div>{{id}}</div>
+      <div>{{text}}</div>
+      <div>{{state}}</div>
+      <delete-item id="{{id}}"></delete-item>
+      <state-item id="{{id}}" text="{{text}}"></state-item>
+      <div>--------------------------------------------</div>
+  </template>
+ 
+<script>
+    Polymer({
+     is: "task-element",
+      properties: {
+        id: {
+          type: Number,
+          notify: true,
+        },
+        text: {
+          type: String,
+          notify: true,
+        },
+        state: {
+          type: Boolean,
+          notify: true,
+        },
+      },
+    });
+  </script>
+  
+</ dom-module>

@@ -1,0 +1,46 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
+<link rel="import" href="/bower_components/paper-material/paper-material.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="form-list">
+  <template>
+      <h1>To-do List</h1>
+   <paper-material elevation="4">
+     <paper-input id="text" char-counter label="Ingresa tu tarea"></paper-input>
+     <paper-button on-click="createTask" raised>Crear</paper-button>
+   </paper-material>
+    
+    <iron-ajax
+               id="ajax"
+               url="http://alecx-box-144703.nitrousapp.com/tasks"
+               handle-as="json"
+               method="POST"
+               on-response="handleResponse">
+    </iron-ajax>
+    
+    <style>
+     paper-material{
+       background-color: #00c853;
+     }
+     paper-button{
+       background-color:#03a9f4;
+     } 
+    </style>
+  </template>
+  
+  <script>
+    Polymer({
+     is: "form-list",
+      createTask: function(){
+         this.$.ajax.params = {"text": this.$.text.value, "state": "false" };
+         this.$.ajax.generateRequest();
+      },
+      handleResponse: function(event) {
+        console.log(event);
+      },
+    });
+  </script>
+  
+</ dom-module>
