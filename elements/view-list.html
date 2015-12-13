@@ -4,6 +4,8 @@
 <link rel="import" href="/bower_components/paper-material/paper-material.html">
 <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 
+<link rel="import" href="/elements/task-element.html">
+
 <dom-module id="view-list">
    <template>
      <iron-ajax
@@ -14,11 +16,10 @@
                last-response="{{tasks}}">
     </iron-ajax>
         
-     
      <paper-material elevation="4">
-        <div>Lista de tareas</div>
+      
         <template is="dom-repeat" items="{{tasks}}">
-          
+          <task-element id="{{item.id}}" text="{{item.text}}" state="{{item.state}}" on-change="onChangeHandler"></task-element>
         </template>
    </paper-material>    
 
@@ -30,6 +31,9 @@
       properties: {
             tasks: { type: Array, notify: true, value: function(){return []} }
         },
+      onChangeHandler: function(event) {
+        console.log("El task-element cambió: " + event);
+      },
     });
   </script>
   

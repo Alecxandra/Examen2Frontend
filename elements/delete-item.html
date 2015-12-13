@@ -3,12 +3,14 @@
 <link rel="import" href="/bower_components/paper-button/paper-button.html">
 <link rel="import" href="/bower_components/paper-material/paper-material.html">
 <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
 
 <dom-module id="delete-item" attributes="id">
   <template>
-    <div>
-      <paper-button on-click="deleteTask" raised>Borrar</paper-button>
-   </div>
+   
+      <paper-icon-button icon="clear" on-click="deleteTask"></paper-icon-button>
+  
     
     <iron-ajax
                id="ajax"
@@ -21,8 +23,8 @@
      paper-material{
        background-color: #00c853;
      }
-     paper-button{
-       background-color:#03a9f4;
+     paper-icon-button{
+       color:#03a9f4;
      } 
     </style>
   </template>
@@ -34,14 +36,18 @@
         id:{
           type: String,
           value:""
-        }
+        },
+        deleted: {
+          type: Boolean,
+          value: false
+        },
       },
       deleteTask: function(){
          this.$.ajax.url = "http://alecx-box-144703.nitrousapp.com/tasks/" + this.id;
          this.$.ajax.generateRequest();
       },
       handleResponse: function(event) {
-        console.log(event);
+        this.deleted = true;
       },
     });
   </script>

@@ -1,16 +1,18 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
+<link rel="import" href="/bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+
 <link rel="import" href="delete-item.html">
 <link rel="import" href="state-item.html">
 
 <dom-module id="task-element">
   <template>
-      <div>{{id}}</div>
-      <div>{{text}}</div>
-      <div>{{state}}</div>
-      <delete-item id="{{id}}"></delete-item>
-      <state-item id="{{id}}" text="{{text}}"></state-item>
-      <div>--------------------------------------------</div>
+      <paper-checkbox checked="{{state}}"></paper-checkbox>
+      <span>{{text}}</span>
+      <delete-item id="{{id}}" on-change="deleteElementHandler"></delete-item>
+      <state-item id="{{id}}" text="{{text}}" on-change="changeElementHandler"></state-item>
+      <hr>
   </template>
  
 <script>
@@ -29,6 +31,17 @@
           type: Boolean,
           notify: true,
         },
+        updated: {
+          type: Boolean,
+          notify: true,
+        },
+        deleted: {
+          type: Boolean,
+          notify: true,
+        },
+      },
+      inputHandler: function(event) {
+        console.log(change);
       },
     });
   </script>
